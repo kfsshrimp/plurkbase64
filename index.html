@@ -1,0 +1,80 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="0">
+<title>PlurkBase64讀取</title>
+<style>
+body{
+    background:#222;
+    color: #fff;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+#FileBox{
+    padding: 10px;
+    margin: 10px;
+}
+</style>
+<script>
+    var JsonFile;
+    window.onload = ()=>{
+
+        document.querySelector("#File").addEventListener("click",()=>{
+            this.value = ``;
+        });
+
+
+        document.querySelector("#FileBox button").addEventListener("click",()=>{
+
+            document.querySelector("#Plurk").innerHTML = ``;
+            var reader = new FileReader();
+            var file = document.querySelector("#File");
+
+            reader.readAsText(file.files[0]);
+
+            reader.onload = (r)=>{
+                try{
+                    console.log(( JSON.parse(r.target.result)) );
+
+                    JsonFile = JSON.parse(r.target.result);
+
+                    ShowPlurk( JSON.parse(r.target.result) );
+
+                }catch(e){
+                    alert("檔案錯誤");
+                    return;
+                }
+            }
+
+        });
+    }
+
+    function ShowPlurk(JsonFile){
+
+        JsonFile.plurk.forEach(plurk => {
+            var plurk_html = document.createElement("div");
+            plurk_html.innerHTML = plurk;
+            
+
+            document.querySelector("#Plurk").appendChild(plurk_html);
+        });
+
+        document.querySelectorAll("img").forEach(img=>{
+
+            if(/^http/.test(img.src)===false) img.src = img.src.replace("file","https");
+            if(JsonFile.img_base64[img.src]===undefined || JsonFile.img_base64[img.src]==="") return;
+
+            img.src = JsonFile.img_base64[img.src];
+        });
+        
+    }
+</script>
+<body>
+    <div id="FileBox">
+        <input id="File" type="file"> <button>讀取</button>
+    </div>
+
+    <div id="Plurk"></div>
+</body>
