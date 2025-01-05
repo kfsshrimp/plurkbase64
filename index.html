@@ -114,7 +114,14 @@ a[href]:hover{
         */
     }
 
-    function ShowPlurk(JsonFile){
+    function ShowPlurk(){
+
+        var plurk_html = document.createElement("div");
+        plurk_html.innerHTML = `<a href="${JsonFile.url}">噗浪原網址${JsonFile.url}</a>`;
+        
+
+        document.querySelector("#Plurk").appendChild(plurk_html);
+
 
         JsonFile.plurk.forEach(plurk => {
             var plurk_html = document.createElement("div");
@@ -136,13 +143,17 @@ a[href]:hover{
         document.querySelectorAll("a").forEach(a=>{
             a.setAttribute("target","_blank");
         });
+
+
+        
         
     }
     function LoadJson(y_m){
 
         fetch(y_m).then(response => response.json()).then(data => {
         
-            ShowPlurk(data);
+            JsonFile = data;
+            ShowPlurk();
         
         }).catch(error => {
 
