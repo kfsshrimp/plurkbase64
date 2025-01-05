@@ -34,7 +34,7 @@ a[href]:hover{
 }
 #Plurk>div{
     border: 1px #fff solid;
-    margin: 2px;
+    margin: 10px;
     padding: 5px;
     border-radius: 10px;
     text-align: left;
@@ -145,6 +145,8 @@ a[href]:hover{
             ShowPlurk(data);
         
         }).catch(error => {
+
+            document.querySelector("#Plurk").innerHTML = `<div>無資料或出現錯誤</div>`;
             console.error(`Error:${error}`);
         });
     }
