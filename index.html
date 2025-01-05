@@ -13,8 +13,8 @@ body{
     text-align: center;
     font-size: 20px;
 }
-a{
-
+button{
+    cursor: pointer;
 }
 a[href]:hover{
     color: #f00;
@@ -60,6 +60,12 @@ a[href]:hover{
             var opt = document.createElement("option");
             opt.innerText = i;
             document.querySelector("#month").appendChild(opt);
+        }
+
+        for(var i=new Date().getFullYear()-3;i<=new Date().getFullYear();i++){
+            var opt = document.createElement("option");
+            opt.innerText = i;
+            document.querySelector("#year").appendChild(opt);
         }
 
 
@@ -148,10 +154,6 @@ a[href]:hover{
     <div id="Info"><a href="https://www.plurk.com/kfsshrimp4" target="_blank">https://www.plurk.com/kfsshrimp4</a><BR>噗浪備份系統</div>
     <div id="FileBox">
         <select id="year" >
-            <option>2025</option>
-            <option>2024</option>
-            <option>2023</option>
-            <option>2022</option>
         </select>
         <select id="month"></select>
         <button id="submit">確定</button>
