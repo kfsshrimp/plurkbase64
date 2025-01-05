@@ -16,16 +16,45 @@ body{
     padding: 10px;
     margin: 10px;
 }
+#Plurk>div{
+    border: 1px #fff solid;
+    margin: 2px;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: left;
+    background: #999;
+    color: #000;
+}
+#Plurk>div a{
+    width: min-content;
+    display: grid;
+}
+#Plurk>div>div:not(.content){
+    display: none;
+}
+#Plurk>div img{
+    height: auto;
+    width: auto;
+}
 </style>
 <script>
     var JsonFile;
     window.onload = ()=>{
+
+
+        document.querySelector("#File").addEventListener("change",(e)=>{
+            document.querySelector("#Plurk").innerHTML = ``;
+            if(e.target.value!=="")
+            LoadJson(`${e.target.value}.json`);
+        });
+        
 
         document.querySelector("#File").addEventListener("click",()=>{
             this.value = ``;
         });
 
 
+        /*
         document.querySelector("#FileBox button").addEventListener("click",()=>{
 
             document.querySelector("#Plurk").innerHTML = ``;
@@ -49,6 +78,7 @@ body{
             }
 
         });
+        */
     }
 
     function ShowPlurk(JsonFile){
@@ -68,12 +98,33 @@ body{
 
             img.src = JsonFile.img_base64[img.src];
         });
+
+
+        document.querySelectorAll("a").forEach(a=>{
+            a.setAttribute("target","_blank");
+        });
         
+    }
+    function LoadJson(y_m){
+
+        fetch(y_m).then(response => response.json()).then(data => {
+        
+            ShowPlurk(data);
+        
+        }).catch(error => {
+            console.error(`Error:${error}`);
+        });
     }
 </script>
 <body>
     <div id="FileBox">
-        <input id="File" type="file"> <button>讀取</button>
+        <select id="File" >
+            <option value="">選擇年月</option>
+            <option>2024 11</option>
+            <option>2024 10</option>
+            <option>2024 9</option>
+        </select>
+        <!--<input id="File" type="file"> <button>讀取</button>-->
     </div>
 
     <div id="Plurk"></div>
