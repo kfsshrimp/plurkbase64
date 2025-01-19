@@ -216,9 +216,9 @@ a[href]:hover{
         
         document.querySelector("#Plurk").appendChild(plurk_html);
 
-        JsonFile.plurk.forEach(plurk => {
+        JsonFile.plurk.forEach((plurk,i) => {
 
-            if(Sys.search.keyword!=="" && plurk.toLocaleUpperCase().indexOf(Sys.search.keyword.toLocaleUpperCase())===-1){
+            if(Sys.search.keyword!=="" && plurk.toLocaleUpperCase().indexOf(Sys.search.keyword.toLocaleUpperCase())===-1 && i!==0){
                 return;
             }
 
