@@ -1,0 +1,38 @@
+charset=UTF-8" />
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="0">
+<script>
+
+window.onload = ()=>{
+
+
+  if ('getBattery' in navigator) {
+  
+  } else {
+    document.body.innerHTML = '此瀏覽器不支援 Battery API';
+    return;
+  }
+
+
+  setInterval(()=>{
+    navigator.getBattery().then(battery => {
+      
+      var html = 
+      `電量: ${battery.level * 100}%
+      <BR>是否正在充電: ${battery.charging}
+      <BR>充電時間（秒）: ${battery.chargingTime}
+      <BR>放電時間（秒）: ${battery.dischargingTime}`;
+        
+
+        document.body.innerHTML = html;
+  });
+
+  },1000)
+    
+
+
+}
+  
+</script>>
