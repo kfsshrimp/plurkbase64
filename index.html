@@ -143,36 +143,6 @@ a[href]:hover{
         
         
 
-        /*
-        document.querySelector("#File").addEventListener("click",()=>{
-            this.value = ``;
-        });
-
-
-        document.querySelector("#MenuBox button").addEventListener("click",()=>{
-
-            document.querySelector("#Plurk").innerHTML = ``;
-            var reader = new FileReader();
-            var file = document.querySelector("#File");
-
-            reader.readAsText(file.files[0]);
-
-            reader.onload = (r)=>{
-                try{
-                    console.log(( JSON.parse(r.target.result)) );
-
-                    JsonFile = JSON.parse(r.target.result);
-
-                    ShowPlurk( JSON.parse(r.target.result) );
-
-                }catch(e){
-                    alert("檔案錯誤");
-                    return;
-                }
-            }
-
-        });
-        */
     }
     function LoadJson(){
 
@@ -236,7 +206,7 @@ a[href]:hover{
 
     function ShowPlurk(){
 
-        if(Sys.search.keyword!=="" && JSON.stringify(JsonFile.plurk).indexOf(Sys.search.keyword)===-1){
+        if(Sys.search.keyword!=="" && JSON.stringify(JsonFile.plurk).toLocaleUpperCase().indexOf(Sys.search.keyword.toLocaleUpperCase())===-1){
             return;
         }
         
@@ -248,7 +218,7 @@ a[href]:hover{
 
         JsonFile.plurk.forEach(plurk => {
 
-            if(Sys.search.keyword!=="" && plurk.indexOf(Sys.search.keyword)===-1){
+            if(Sys.search.keyword!=="" && plurk.toLocaleUpperCase().indexOf(Sys.search.keyword.toLocaleUpperCase())===-1){
                 return;
             }
 
