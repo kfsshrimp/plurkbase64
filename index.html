@@ -109,37 +109,7 @@ a[href]:hover{
 
         });
 
-        //關鍵字搜尋
-        document.querySelector("#search").addEventListener("click",()=>{
-
-            document.querySelector("#Plurk").innerHTML = ``;
-
-            var keyword = document.querySelector("#keyword").value;
-
-            
-            for(var y=new Date().getFullYear();y>new Date().getFullYear()-4;y--)
-            for(var m=12;m>0;m--){
-                
-                    fetch(`${y} ${m}.json`).then(response => response.json()).then(data => {
-                        JsonFile = data;
-                
-                        JsonFile.plurk.forEach(plurk => {
-                            if(plurk.indexOf(keyword)!==-1){
-                                var plurk_html = document.createElement("div");
-                                plurk_html.innerHTML = plurk;
-
-                                document.querySelector("#Plurk").appendChild(plurk_html);
-                            }
-                    });
-
-
-                
-                }).catch(error => {
-
-                });
-
-            };
-        });
+    
         
         
 
@@ -175,6 +145,7 @@ a[href]:hover{
         Sys.search.month = Sys.search.month||12;
 
         var file_name = `${Sys.search.year} ${Sys.search.month}.json`;
+        console.log(file_name);
         fetch(file_name).then(response => response.json()).then(data => {
 
             JsonFile = data;
@@ -193,6 +164,7 @@ a[href]:hover{
                     document.querySelector("#submit").removeAttribute("disabled");
                     document.querySelector("#keyword").removeAttribute("disabled");
                     document.querySelector("body").style.cursor = "";
+                    document.querySelector("#Plurk").innerHTML = `<div>無資料或出現錯誤</div>`;
                     return;
                 }
 
@@ -211,6 +183,7 @@ a[href]:hover{
                 document.querySelector("#submit").removeAttribute("disabled");
                 document.querySelector("#keyword").removeAttribute("disabled");
                 document.querySelector("body").style.cursor = "";
+                document.querySelector("#Plurk").innerHTML = `<div>無資料或出現錯誤</div>`;
                 return;
             }
 
