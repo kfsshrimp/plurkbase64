@@ -168,6 +168,7 @@ a[href]:hover{
     function LoadJsonAll(){
 
         document.querySelector("#submit").setAttribute("disabled","disabled");
+        document.querySelector("#keyword").setAttribute("disabled","disabled");
         document.querySelector("body").style.cursor = "progress";
 
         Sys.search.year = Sys.search.year||new Date().getFullYear();
@@ -190,6 +191,7 @@ a[href]:hover{
                 if(Sys.search.year<=new Date().getFullYear()-4){
 
                     document.querySelector("#submit").removeAttribute("disabled");
+                    document.querySelector("#keyword").removeAttribute("disabled");
                     document.querySelector("body").style.cursor = "";
                     return;
                 }
@@ -204,7 +206,13 @@ a[href]:hover{
                 Sys.search.month = 12;
                 Sys.search.year--;
             }
-            if(Sys.search.year<=new Date().getFullYear()-4) return;
+            if(Sys.search.year<=new Date().getFullYear()-4){
+
+                document.querySelector("#submit").removeAttribute("disabled");
+                document.querySelector("#keyword").removeAttribute("disabled");
+                document.querySelector("body").style.cursor = "";
+                return;
+            }
 
             LoadJsonAll();
         });
