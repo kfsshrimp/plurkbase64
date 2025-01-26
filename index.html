@@ -167,6 +167,9 @@ a[href]:hover{
 
     function LoadJsonAll(){
 
+        document.querySelector("#submit").setAttribute("disabled","disabled");
+        document.querySelector("body").style.cursor = "progress";
+
         Sys.search.year = Sys.search.year||new Date().getFullYear();
         Sys.search.month = Sys.search.month||12;
 
@@ -178,12 +181,18 @@ a[href]:hover{
             ShowPlurk();
 
             setTimeout(()=>{
+
                 Sys.search.month--;
                 if(Sys.search.month<=0){
                     Sys.search.month = 12;
                     Sys.search.year--;
                 }
-                if(Sys.search.year<=new Date().getFullYear()-4) return;
+                if(Sys.search.year<=new Date().getFullYear()-4){
+
+                    document.querySelector("#submit").removeAttribute("disabled");
+                    document.querySelector("body").style.cursor = "";
+                    return;
+                }
 
                 LoadJsonAll();
             },100);
