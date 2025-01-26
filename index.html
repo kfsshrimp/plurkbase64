@@ -164,7 +164,7 @@ a[href]:hover{
                     document.querySelector("#submit").removeAttribute("disabled");
                     document.querySelector("#keyword").removeAttribute("disabled");
                     document.querySelector("body").style.cursor = "";
-                    document.querySelector("#Plurk").innerHTML = `<div>無資料或出現錯誤</div>`;
+                    document.querySelector("#Plurk").innerHTML = document.querySelector("#Plurk").innerHTML||`<div>無資料或出現錯誤</div>`;
                     return;
                 }
 
@@ -183,7 +183,7 @@ a[href]:hover{
                 document.querySelector("#submit").removeAttribute("disabled");
                 document.querySelector("#keyword").removeAttribute("disabled");
                 document.querySelector("body").style.cursor = "";
-                document.querySelector("#Plurk").innerHTML = `<div>無資料或出現錯誤</div>`;
+                document.querySelector("#Plurk").innerHTML = document.querySelector("#Plurk").innerHTML||`<div>無資料或出現錯誤</div>`;
                 return;
             }
 
